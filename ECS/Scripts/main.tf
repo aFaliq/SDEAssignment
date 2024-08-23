@@ -1,5 +1,5 @@
 resource "aws_ecr_repository" "ecr_repo" {
-  name                 = "ecr-repo-1" 
+  name                 = var.repository 
   image_tag_mutability = "MUTABLE"
   
 
@@ -10,15 +10,15 @@ resource "aws_ecr_repository" "ecr_repo" {
 
 
 resource "aws_ecs_cluster" "my_fargate_cluster" {
-  name = "my-fargate-cluster"
+  name = var.ecs_cluster_name
 }
 
 resource "aws_ecs_task_definition" "my_fargate_task" {
-  family                   = "my-fargate-task"
+  family                   = var.ecs_task_family
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  cpu                      = "256"
-  memory                   = "512"
+  cpu                      = var.ecs_task_cpu
+  memory                   = var.ecs_task_memory
 
   container_definitions = jsonencode([
     {
