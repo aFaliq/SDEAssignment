@@ -1,0 +1,43 @@
+name: CI/CD Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        language: [python, java, node]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up ${{ matrix.language }}
+      if: matrix.language == 'python'
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Set up ${{ matrix.language }}
+      if: matrix.language == 'java'
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+
+    - name: Set up ${{ matrix.language }}
+      if: matrix.language == 'node'
+      uses: actions/setup-node@v4
+      with:
+        node-version: '14'
+
+    - name: Build and Test
+      run: |
+        if [ "${{ matrix.language }}" == "python" ]; then
+          python -m unittest discover;
+        elif [ "${{ matrix.language }}" == "java" ]; then
+          ./mvnw test;
+        elif [ "${{ matrix.language }}" == "node" ]; then
+          npm install && npm test;
+        fi
