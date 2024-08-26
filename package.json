@@ -1,0 +1,21 @@
+{
+    "name": "testapi-spec",
+    "version": "1.0.0",
+    "description": "OpenAPI specification for TestAPI",
+    "author": "Mohd Anis",
+    "license": "MIT",
+    "scripts": {
+      "premock": "yarn bundle",
+      "mock": "prism mock ./bin/test-api.yaml -h 0.0.0.0",
+      "bundle": "swagger-cli bundle api/test-api.yaml -o ./bin/test-api.yaml -t yaml",
+      "prelint": "yarn bundle",
+      "lint": "spectral lint ./bin/test-api.yaml --ignore-unknown-format"
+    },
+    "dependencies": {
+      "@openapitools/openapi-generator-cli": "^1.0.15-4.3.1",
+      "@stoplight/prism-cli": "^4.0.0",
+      "@stoplight/spectral": "^5.5.0",
+      "swagger-cli": "^4.0.4"
+    }  
+}
+  
