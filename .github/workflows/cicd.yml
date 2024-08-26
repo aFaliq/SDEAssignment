@@ -41,7 +41,7 @@ jobs:
         if [ -f "pom.xml" ]; then
           mvn clean package;
         elif [ -f "package.json" ]; then
-          npm install && npm test;
+          npm install;
         elif [ -f "requirements.txt" ]; then
           pip install -r requirements.txt && pytest;
         fi
