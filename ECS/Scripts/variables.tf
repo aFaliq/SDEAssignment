@@ -1,5 +1,5 @@
 variable "repository"{
-    default = "ecr-repo-1"
+    default = "faliq/myrepo"
     type = string
 }
 
@@ -21,5 +21,6 @@ variable "ecs_task_memory"{
 }
 
 variable "image_tag"{
+    default = "latest"
     
 }
