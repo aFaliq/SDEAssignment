@@ -51,6 +51,7 @@ jobs:
 
     - name: Push to ECR
       run: |
+        aws configure --profile ${{ secret.AWS_ACCESS_KEY}} ${{secret.AWS_SECRET_KEY}}
         aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPO
         docker tag $ECR_REPO:$IMAGE_TAG $ECR_REPO:$IMAGE_TAG
         docker push $ECR_REPO:$IMAGE_TAG
