@@ -2,6 +2,10 @@ data "aws_ecr_repository" "my_repo" {
   name = var.repository
 }
 
+data "aws_iam_role" "ecs_task_execution_role" {
+  name = "ecsTaskExecutionRole"
+}
+
 resource "aws_ecs_cluster" "my_cluster" {
   name = var.ecs_cluster_name
 }
@@ -12,6 +16,8 @@ resource "aws_ecs_task_definition" "my_task" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.ecs_task_cpu
   memory                   = var.ecs_task_memory
+  task_role_arn            = "${aws_iam_role.github-role.arn}"
+  execution_role_arn       = "${data.aws_iam_role.ecs_task_execution_role.arn}"
 
   container_definitions = jsonencode([
     {
