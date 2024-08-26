@@ -3,7 +3,7 @@ data "aws_ecr_repository" "my_repo" {
 }
 
 data "aws_iam_role" "ecs_task_execution_role" {
-  name = "ecsTaskExecutionRole"
+  name = "ecs_task_execution_role"
 }
 
 resource "aws_ecs_cluster" "my_cluster" {
