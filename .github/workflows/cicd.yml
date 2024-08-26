@@ -53,7 +53,7 @@ jobs:
       run: |
         aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY}} 
         aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_KEY}}
-        aws ecr get-login-password  --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPO
+        aws ecr get-login-password  --region $AWS_REGION | docker login --username ${{ secrets.LOGIN }} --password-stdin ${{ secrets.DOCKER_TOKEN }}
         docker tag $ECR_REPO:$IMAGE_TAG $ECR_REPO:$IMAGE_TAG
         docker push $ECR_REPO:$IMAGE_TAG
 
