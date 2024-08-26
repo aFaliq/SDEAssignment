@@ -2,7 +2,7 @@ data "aws_ecr_repository" "my_repo" {
   name = var.repository
 }
 data "aws_iam_role" "ecs_task_execution" {
-  name = "ecs_task_execution_role " 
+  name = "ecstaskexecutionrole" 
 }
 resource "aws_ecs_cluster" "my_cluster" {
   name = var.ecs_cluster_name
