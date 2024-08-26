@@ -61,4 +61,4 @@ jobs:
     - name: Deploy to ECS
       run: |
         terraform init
-        terraform plan -out=tfplan.bin
+        terraform apply -auto-approve
