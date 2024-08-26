@@ -19,3 +19,7 @@ variable "ecs_task_cpu"{
 variable "ecs_task_memory"{
     default = "512"
 }
+
+variable "image_tag"{
+    
+}
