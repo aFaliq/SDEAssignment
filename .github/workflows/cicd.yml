@@ -11,7 +11,7 @@ jobs:
 
     env:
       AWS_REGION: 'ap-southeast-1'
-      ECR_REPO: '/faliq/myrepo'
+      ECR_REPO: 'faliq/myrepo'
       IMAGE_TAG: '${{ github.sha }}'
 
     steps:
@@ -54,9 +54,9 @@ jobs:
         aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY}} 
         aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_KEY}}
         
-        docker login -u AWS -p $(aws ecr get-login-password --region $AWS_REGION) 061039780090.dkr.ecr.ap-southeast-1.amazonaws.com
-        docker tag $ECR_REPO:$IMAGE_TAG 061039780090.dkr.ecr.ap-southeast-1.amazonaws.com$ECR_REPO:$IMAGE_TAG
-        docker push 061039780090.dkr.ecr.ap-southeast-1.amazonaws.com$ECR_REPO:$IMAGE_TAG
+        docker login -u AWS -p $(aws ecr get-login-password --region $AWS_REGION) 061039780090.dkr.ecr.ap-southeast-1.amazonaws.com/
+        docker tag $ECR_REPO:$IMAGE_TAG 061039780090.dkr.ecr.ap-southeast-1.amazonaws.com/$ECR_REPO:$IMAGE_TAG
+        docker push 061039780090.dkr.ecr.ap-southeast-1.amazonaws.com/$ECR_REPO:$IMAGE_TAG
 
     - name: Deploy to ECS
       run: |
