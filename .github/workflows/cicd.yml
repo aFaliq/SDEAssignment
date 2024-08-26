@@ -49,11 +49,6 @@ jobs:
     - name: Build Docker Image
       run: docker build -t $ECR_REPO:$IMAGE_TAG .
 
-    - name: Push to Nexus
-      run: |
-        docker tag $ECR_REPO:$IMAGE_TAG nexus-repo/my-app:$IMAGE_TAG
-        docker push nexus-repo/my-app:$IMAGE_TAG
-
     - name: Push to ECR
       run: |
         aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPO
