@@ -47,15 +47,15 @@ jobs:
         fi
 
     - name: Build Docker Image
-      run: docker build -t $ECR_REPO:$IMAGE_TAG .
+      run: docker build -t /faliq/myrepo.
 
     - name: Push to ECR
       run: |
         aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY}} 
         aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_KEY}}
         aws ecr get-login-password  --region ap-southeast-01 | docker login --username ${{ secrets.DOCKER_LOGIN }} --password-stdin ${{ secrets.DOCKER_TOKEN }} 061039780090.dkr.ecr.ap-southeast-1.amazonaws.com
-        docker tag $ECR_REPO:$IMAGE_TAG $ECR_REPO:$IMAGE_TAG
-        docker push $ECR_REPO:$IMAGE_TAG
+        docker tag faliq/myrepo:latest 061039780090.dkr.ecr.ap-southeast-1.amazonaws.com/faliq/myrepo:latest
+        docker push 061039780090.dkr.ecr.ap-southeast-1.amazonaws.com/faliq/myrepo:latest
 
     - name: Deploy to ECS
       run: |
